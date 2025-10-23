@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from '../components/ui/button';   // or adjust path as needed
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 

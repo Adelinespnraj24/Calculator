@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Button } from '../components/ui/button';   // or adjust path as needed
-import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "../components/ui/button"; // fixed relative path
+import { Card, CardContent } from "../components/ui/card"; // fixed relative path
 import { motion } from "framer-motion";
 
 export default function Calculator() {

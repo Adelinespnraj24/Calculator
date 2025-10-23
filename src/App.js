@@ -1,62 +1,44 @@
 import React, { useState } from "react";
-import { Button } from "../components/ui/button"; // fixed relative path
-import { Card, CardContent } from "../components/ui/card"; // fixed relative path
-import { motion } from "framer-motion";
-
-export default function Calculator() {
+function SimpleCalculator() {
   const [input, setInput] = useState("");
-  const [result, setResult] = useState("");
-
   const handleClick = (value) => {
-    if (value === "C") {
-      setInput("");
-      setResult("");
-    } else if (value === "=") {
-      try {
-        const evalResult = eval(input);
-        setResult(evalResult);
-      } catch {
-        setResult("Error");
-      }
-    } else {
-      setInput(input + value);
-    }
+    setInput(input + value);
   };
-
-  const buttons = [
-    "7", "8", "9", "/", 
-    "4", "5", "6", "*", 
-    "1", "2", "3", "-", 
-    "0", ".", "%", "+", 
-    "C", "="
-  ];
-
+  const handleClear = () => {
+    setInput("");
+  };
+  const handleEqual = () => {
+    setInput(eval(input).toString());
+  };
   return (
-    <motion.div
-      className="flex items-center justify-center min-h-screen bg-gray-100"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-    >
-      <Card className="w-80 shadow-2xl rounded-2xl p-4 bg-white">
-        <CardContent>
-          <div className="mb-4">
-            <div className="text-right text-2xl font-mono">{input || "0"}</div>
-            <div className="text-right text-gray-500">{result ? `= ${result}` : ""}</div>
-          </div>
-          <div className="grid grid-cols-4 gap-2">
-            {buttons.map((btn) => (
-              <Button
-                key={btn}
-                variant={btn === "=" ? "default" : "outline"}
-                className="text-xl p-4 rounded-2xl"
-                onClick={() => handleClick(btn)}
-              >
-                {btn}
-              </Button>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-    </motion.div>
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
+      <h2>Simple Calculator</h2>
+      <input type="text" value={input} readOnly style={{ width: "150px", textAlign: "right" }} />
+      <div>
+        <button onClick={() => handleClick("1")}>1</button>
+        <button onClick={() => handleClick("2")}>2</button>
+        <button onClick={() => handleClick("3")}>3</button>
+        <button onClick={() => handleClick("+")}>+</button>
+      </div>
+      <div>
+        <button onClick={() => handleClick("4")}>4</button>
+        <button onClick={() => handleClick("5")}>5</button>
+        <button onClick={() => handleClick("6")}>6</button>
+        <button onClick={() => handleClick("-")}>-</button>
+      </div>
+      <div>
+        <button onClick={() => handleClick("7")}>7</button>
+        <button onClick={() => handleClick("8")}>8</button>
+        <button onClick={() => handleClick("9")}>9</button>
+        <button onClick={() => handleClick("*")}>*</button>
+      </div>
+      <div>
+        <button onClick={handleClear}>C</button>
+        <button onClick={() => handleClick("0")}>0</button>
+        <button onClick={handleEqual}>=</button>
+        <button onClick={() => handleClick("/")}>/</button>
+      </div>
+    </div>
   );
 }
+export default SimpleCalculator;
